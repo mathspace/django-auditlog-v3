@@ -2,6 +2,7 @@ name: Test
 
 on: [push, pull_request]
 
+permissions: read-all
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -30,7 +31,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+      uses: actions/setup-python@3542bca2639a428e1796aaa6a2ffef0c0f575566 # v3
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -40,7 +41,7 @@ jobs:
         echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
 
     - name: Cache
-      uses: actions/cache@v3
+      uses: actions/cache@6f8efc29b200d32929f49075959781ed54ec270c # v3
       with:
         path: ${{ steps.pip-cache.outputs.dir }}
         key:
@@ -64,6 +65,6 @@ jobs:
         TEST_DB_PORT: ${{ job.services.postgres.ports[5432] }}
 
     - name: Upload coverage
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@ab904c41d6ece82784817410c45d8b8c02684457 # v3
       with:
         name: Python ${{ matrix.python-version }}
